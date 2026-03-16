@@ -1,7 +1,8 @@
-AWS 3-Tier Platform (Terraform + CI/CD)
-Overview
+## AWS 3-Tier Platform (Terraform + CI/CD)
+## Overview
 
-This project provisions a production-style highly available AWS 3-tier web platform using Terraform and deploys infrastructure through a fully automated GitHub Actions CI/CD pipeline.
+This project provisions a production-style highly available AWS 3-tier web platform using Terraform and deploys infrastructure through a fully automated GitHub Actions CI/CD pipeline. The platform was deployed, validated, tested for self-healing behaviour, and safely destroyed to demonstrate cost-aware infrastructure lifecycle management.
+
 
 The platform demonstrates real-world DevOps practices including:
 
@@ -19,9 +20,7 @@ The platform demonstrates real-world DevOps practices including:
   
   -Protected deployment pipeline with manual approval
 
-This project simulates how cloud infrastructure is deployed in modern engineering teams.
-
-Architecture
+## Architecture
 
 The platform deploys:
 
@@ -51,9 +50,9 @@ Traffic flow:
 
 Internet → ALB (public subnets) → EC2 instances (private subnets)
 
-Key Features
+## Key Features
 
-High Availability
+## High Availability
 
   -Multi-AZ deployment
   
@@ -63,7 +62,7 @@ High Availability
   
   -Verified self-healing behaviour
 
-Secure Network Design
+## Secure Network Design
 
   -Application servers isolated in private subnets
   
@@ -71,13 +70,13 @@ Secure Network Design
   
   -Outbound internet access through NAT Gateway only
 
-Observability & Scaling
+## Observability & Scaling
 
   -CloudWatch alarm triggers scale-out
   
   -Target tracking policy maintains performance under load
 
-Remote State Management
+## Remote State Management
 
   -Terraform state stored in S3
   
@@ -85,11 +84,11 @@ Remote State Management
   
   -Enables team-safe infrastructure deployments
 
-CI/CD Pipeline (GitHub Actions)
+## CI/CD Pipeline (GitHub Actions)
 
 The repository includes a two-stage deployment pipeline:
 
-Stage 1 — Terraform CI
+## Stage 1 — Terraform CI
 
 Runs automatically on push:
 
@@ -105,7 +104,7 @@ Runs automatically on push:
 
 This ensures infrastructure code quality and visibility before deployment.
 
-Stage 2 — Protected Deploy
+## Stage 2 — Protected Deploy
 
   -Requires manual approval
   
@@ -116,7 +115,7 @@ Stage 2 — Protected Deploy
 
 This models real production release controls.
 
-Project Structure
+## Project Structure
 
 aws-3tier-platform/
 │
@@ -149,9 +148,9 @@ aws-3tier-platform/
 
 └── README.md
 
-Deployment
+## Deployment
 
-Prerequisites
+## Prerequisites
 
   -AWS Account
   
@@ -164,19 +163,19 @@ Prerequisites
     AWS_SECRET_ACCESS_KEY
     AWS_REGION
 
-Local Deployment
+## Local Deployment
     terraform init
     terraform plan
     terraform apply
 
-CI Deployment
+## CI Deployment
 
 Push to main branch:
     git push origin main
 
 Approve deployment in GitHub Actions UI.
 
-Validation
+## Validation
 
 After deployment:
 
@@ -186,7 +185,33 @@ After deployment:
   
   -Terminate an EC2 instance to observe Auto Scaling self-healing
 
-Learning Outcomes
+## Cleanup
+
+To avoid unnecessary AWS charges, destroy the infrastructure after testing.
+
+Destroy main infrastructure
+
+  terraform destroy
+
+Destroy backend resources
+
+   cd backend-setup
+   
+   terraform destroy
+
+## Important notes
+
+Destroy the main infrastructure before deleting the remote state backend.
+
+If the S3 backend bucket has versioning enabled, empty all object versions and delete markers before destroying the bucket.
+
+Always confirm that EC2 instances, Load Balancers, Auto Scaling Groups, NAT Gateways, and target groups have been removed.
+
+
+---
+
+
+## Learning Outcomes
 
 This project demonstrates practical skills in:
 
@@ -202,8 +227,8 @@ This project demonstrates practical skills in:
 
 
 
-Author
 
+## Author
 Iskandar Nuhu
 
 Cloud & DevOps Engineer
