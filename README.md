@@ -90,19 +90,33 @@ Project Structure
 
 aws-3tier-platform/
 │
+
 ├── main.tf
+
 ├── variables.tf
+
 ├── outputs.tf
+
 ├── provider.tf
+
 ├── terraform.tfvars
+
 │
+
 ├── backend-setup/
+
 │   ├── s3.tf
+
 │   └── dynamodb.tf
+
 │
+
 ├── .github/workflows/
+
 │   └── terraform.yml
+
 │
+
 └── README.md
 
 Deployment
